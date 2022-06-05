@@ -10,3 +10,5 @@ export const transform = async () => {
 
     process.stdin.pipe(reverse).pipe(process.stdout);
 };
+
+// transform()

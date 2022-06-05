@@ -1,5 +1,10 @@
 import { Worker, setEnvironmentData } from 'worker_threads';
 import { cpus } from 'os';
+import path from 'path';
+import {fileURLToPath} from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 
 export const performCalculations = async () => {
@@ -12,7 +17,7 @@ export const performCalculations = async () => {
     const startWorker = (num) => {
         return new Promise((resolve, reject) => {
             setEnvironmentData('num', num);
-            const worker = new Worker('./worker.js');
+            const worker = new Worker(`${__dirname}/worker.js`);
             workers.push(worker)
 
             worker.on('message', resolve)
@@ -43,3 +48,5 @@ export const performCalculations = async () => {
     })
 
 };
+
+// performCalculations()
